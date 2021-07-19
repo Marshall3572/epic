@@ -17,11 +17,18 @@ const Logo = styled.img`
 const StyledLink = styled(NavLink)`
   color: #fff;
   margin-left: 30px;
-  &.active{
+
+  &.active {
     border-bottom: 1px solid #fff;
   }
 `
+const Button = styled.button`
+  margin-left: 10px;
+`
 
+const Login = styled.div`
+  margin-left: auto;
+`
 
 const Component = () => {
   return (
@@ -29,10 +36,14 @@ const Component = () => {
       <Logo src={LogoUrl}/>
       <nav>
         {/*activeClassName是navLink特有的*/}
-        <StyledLink exact to='/' activeClassName="active">首页</StyledLink>
-        <StyledLink to='/history' activeClassName="active">上传历史</StyledLink>
-        <StyledLink to='/about' activeClassName="active">关于我</StyledLink>
+        <StyledLink exact to="/" activeClassName="active">首页</StyledLink>
+        <StyledLink to="/history" activeClassName="active">上传历史</StyledLink>
+        <StyledLink to="/about" activeClassName="active">关于我</StyledLink>
       </nav>
+      <Login>
+        <Button><StyledLink to="/login">登陆</StyledLink></Button>
+        <Button><StyledLink to="/register">注册</StyledLink></Button>
+      </Login>
     </Header>
   )
 }
