@@ -344,6 +344,15 @@
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-syntax-decorators" "^7.12.1"
 
+"@babel/plugin-proposal-decorators@^7.14.5":
+  version "7.14.5"
+  resolved "http://r.npm.sankuai.com/@babel/plugin-proposal-decorators/download/@babel/plugin-proposal-decorators-7.14.5.tgz#59bc4dfc1d665b5a6749cf798ff42297ed1b2c1d"
+  integrity sha1-WbxN/B1mW1pnSc95j/Qil+0bLB0=
+  dependencies:
+    "@babel/helper-create-class-features-plugin" "^7.14.5"
+    "@babel/helper-plugin-utils" "^7.14.5"
+    "@babel/plugin-syntax-decorators" "^7.14.5"
+
 "@babel/plugin-proposal-dynamic-import@^7.12.1", "@babel/plugin-proposal-dynamic-import@^7.14.5":
   version "7.14.5"
   resolved "http://r.npm.sankuai.com/@babel/plugin-proposal-dynamic-import/download/@babel/plugin-proposal-dynamic-import-7.14.5.tgz#0c6617df461c0c1f8fff3b47cd59772360101d2c"
@@ -499,7 +508,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-syntax-decorators@^7.12.1":
+"@babel/plugin-syntax-decorators@^7.12.1", "@babel/plugin-syntax-decorators@^7.14.5":
   version "7.14.5"
   resolved "http://r.npm.sankuai.com/@babel/plugin-syntax-decorators/download/@babel/plugin-syntax-decorators-7.14.5.tgz#eafb9c0cbe09c8afeb964ba3a7bbd63945a72f20"
   integrity sha1-6vucDL4JyK/rlkujp7vWOUWnLyA=
@@ -7347,6 +7356,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "http://r.npm.sankuai.com/mkdirp/download/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha1-PrXtYmInVteaXw4qIh3+utdcL34=
+
+mobx@^6.3.1:
+  version "6.3.1"
+  resolved "http://r.npm.sankuai.com/mobx/download/mobx-6.3.1.tgz#6d2e519e7bb0275dd5b9b1fa81475894e85aad99"
+  integrity sha1-bS5RnnuwJ13VubH6gUdYlOharZk=
 
 move-concurrently@^1.0.1:
   version "1.0.1"

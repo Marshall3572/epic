@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home = () => {
+const Component = () => {
   return (
     <>
       <h1 style={{color: 'red'}}>Home</h1>
@@ -8,4 +8,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default Component
