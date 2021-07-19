@@ -56,7 +56,7 @@ const Component = () => {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Username"
+          label="用户名"
           name="username"
           rules={[
             {
