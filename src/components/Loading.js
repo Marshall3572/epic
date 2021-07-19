@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const Loading = () => {
+const Component = () => {
   return (
     <div>
       Loading...
     </div>
   )
 }
+export default Component

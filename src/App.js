@@ -1,8 +1,8 @@
 import React, {Suspense, lazy} from 'react'
 import './App.css'
-import {Header} from './components/Header'
-import {Footer} from './components/Footer'
-import {Loading} from './components/Loading'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Loading from './components/Loading'
 import {Switch, Route} from 'react-router-dom'
 
 // import {Home} from './pages/Home'
@@ -18,7 +18,7 @@ function App() {
   // console.log('alias导出：',import('./pages/History').then(res => ({default:res.History})))
   // console.log('default导出：',import('./pages/Home'))
   return (
-    <div className="app">
+    <>
       <Header/>
       <main>
         {/*添加suspense和fallback机制，让分包加载的时候显示loading的状态*/}
@@ -32,7 +32,7 @@ function App() {
         </Suspense>
       </main>
       <Footer/>
-    </div>
+    </>
   )
 }
 
