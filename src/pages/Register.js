@@ -1,40 +1,56 @@
-import {Form, Input, Button, Checkbox} from 'antd'
+import {Form, Input, Button} from 'antd'
 import React from 'react'
 import styled from 'styled-components'
+import {useStores} from '../stores'
+import {useHistory} from 'react-router-dom'
+
+const Wrapper = styled.div`
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2\);
+  border-radius: 4px;
+  padding: 20px;
+`
+const Title = styled.h1`
+  text-align: center;
+  margin-bottom: 30px;
+`
 
 const Component = () => {
-  const Wrapper = styled.div`
-    max-width: 600px;
-    margin: 30px auto;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2\);
-    border-radius: 4px;
-    padding: 20px;
-  `
-  const Title = styled.h1`
-    text-align: center;
-    margin-bottom: 30px;
-  `
 
-  const onFinish = (values) => {
-    console.log('Success:', values)
-  }
+  const { AuthStore } = useStores();
+  const history = useHistory()
+
+  const onFinish = values => {
+    console.log('Success:', values);
+    AuthStore.setUsername(values.username);
+    AuthStore.setPassword(values.password);
+    AuthStore.register()
+      .then(() => {
+        console.log('注册成功, 跳转到首页')
+        history.push('/')
+      }).catch(() => {
+      console.log('注册失败，什么都不做')
+    });
+  };
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
-
 
   const validateUsername = (rule, value) => {
     if (/\W/.test(value)) return Promise.reject('不能出现字母数字下划线以外的字符')
     if (value.length < 3) return Promise.reject('用户名长度不能小于3')
     if (value.length > 10) return Promise.reject('用户名长度不能大于10')
-    Promise.resolve()
+    return Promise.resolve();
   }
+
   // 箭头函数后加()是因为返回了一个对象，不加会被理解为函数体
   const validateConform = ({getFieldValue}) => ({
-    validator(rule, value){
-      if(getFieldValue('password') === value)
-        return Promise.resolve();
-       return Promise.reject('两次密码不一致')
+    validator(rule, value) {
+      if (getFieldValue('password') === value)
+        return Promise.resolve()
+      return Promise.reject('两次密码不一致')
     }
   })
 

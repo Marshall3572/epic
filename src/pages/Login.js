@@ -1,23 +1,38 @@
 import {Form, Input, Button, Checkbox} from 'antd'
 import React from 'react'
 import styled from 'styled-components'
+import {useStores} from '../stores'
+import {useHistory} from 'react-router-dom'
+
+const Wrapper = styled.div`
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2\);
+  border-radius: 4px;
+  padding: 20px;
+`
+const Title = styled.h1`
+  text-align: center;
+  margin-bottom: 30px;
+`
 
 const Component = () => {
-  const Wrapper = styled.div`
-    max-width: 600px;
-    margin: 30px auto;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2\);
-    border-radius: 4px;
-    padding: 20px;
-  `
-  const Title = styled.h1`
-    text-align: center;
-    margin-bottom: 30px;
-  `
 
+  const {AuthStore} = useStores()
+  const history = useHistory()
   const onFinish = (values) => {
     console.log('Success:', values)
+    AuthStore.setUsername(values.username)
+    AuthStore.setPassword(values.password)
+    AuthStore.login()
+      .then(() => {
+        console.log('登陆成功, 跳转到首页')
+        history.push('/')
+      }).catch(() => {
+      console.log('登录失败，什么都不做')
+    })
   }
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }

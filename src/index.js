@@ -6,13 +6,12 @@ import reportWebVitals from './reportWebVitals'
 import {
   BrowserRouter as Router
 } from 'react-router-dom'
+import Model from './models/index'
 
 ReactDOM.render(
-  <React.StrictMode>
     <Router>
       <App/>
-    </Router>
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 )
 

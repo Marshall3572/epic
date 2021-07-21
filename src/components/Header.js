@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import LogoUrl from '../logo.svg'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import {Button} from 'antd'
-
+import {useStores} from '../stores'
+import {observer} from 'mobx-react'
 
 // header是styled的方法，` `里是params
 const Header = styled.header`
@@ -32,31 +33,49 @@ const StyledButton = styled(Button)`
   margin-left: 10px;
 `
 
-const Component = () => {
+const Component = observer(() => {
 
-  const [isLogin, setIsLogin] = useState(false)
+    const history = useHistory()
+    const {UserStore, AuthStore} = useStores()
 
-  return (
-    <Header>
-      <Logo src={LogoUrl}/>
-      <nav>
-        {/*activeClassName是navLink特有的*/}
-        <StyledLink exact to="/" activeClassName="active">首页</StyledLink>
-        <StyledLink to="/history" activeClassName="active">上传历史</StyledLink>
-        <StyledLink to="/about" activeClassName="active">关于我</StyledLink>
-      </nav>
-      <Login>
-        {
-          isLogin ? <>
-          Marshall<StyledButton type="primary" onClick={()=>setIsLogin(false)}>注销</StyledButton>
-          </>:<>
-            <StyledButton type="primary" onClick={()=>setIsLogin(true)}>登陆</StyledButton>
-            <StyledButton type="primary">注册</StyledButton>
-          </>
-        }
-      </Login>
-    </Header>
+    const handleLogout = () => {
+      AuthStore.logout()
+    }
+
+    const handleRegister = () => {
+      console.log('跳转到注册页面')
+      history.push('/register')
+    }
+
+    const handleLogin = () => {
+      console.log('跳转到登陆页面')
+      history.push('/login')
+    }
+
+    return (
+      <Header>
+        <Logo src={LogoUrl}/>
+        <nav>
+          {/*activeClassName是navLink特有的*/}
+          <StyledLink exact to="/" activeClassName="active">首页</StyledLink>
+          <StyledLink to="/history" activeClassName="active">上传历史</StyledLink>
+          <StyledLink to="/about" activeClassName="active">关于我</StyledLink>
+        </nav>
+        <Login>
+          {
+            UserStore.currentUser ? <>
+                {UserStore.currentUser.attributes.username}
+                <StyledButton type="primary" onClick={handleLogout}>注销</StyledButton>
+              </>
+              : <>
+                <StyledButton type="primary" onClick={handleLogin}>登陆</StyledButton>
+                <StyledButton type="primary" onClick={handleRegister}>注册</StyledButton>
+              </>
+          }
+        </Login>
+      </Header>
+    )
+  }
 )
-}
 export default Component
 
