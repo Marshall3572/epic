@@ -18,20 +18,34 @@ const Auth = {
     })
   },
 
-  login(username, password){
+  login(username, password) {
     return new Promise((resolve, reject) => {
       User.logIn(username, password).then(loginedUser => resolve(loginedUser), error => reject(error))
     })
   },
-  logout(){
-    User.logOut();
+  logout() {
+    User.logOut()
   },
-  getCurrentUser(){
-    return User.current();
+  getCurrentUser() {
+    return User.current()
+  }
+}
+
+const Uploader = {
+  add: function (file, filename) {
+    const item = new AV.Object('Image')
+    const avFile = new AV.File(filename, file)
+    item.set('filename', filename)
+    item.set('owner', AV.User.current())
+    item.set('url', avFile)
+    return new Promise((resolve, reject) => {
+      item.save().then(serverfile => resolve(serverfile), err => reject(err))
+    })
   }
 }
 
 export {
   // 先把这一个API暴露出去，后边有再加
-  Auth
+  Auth,
+  Uploader
 }
