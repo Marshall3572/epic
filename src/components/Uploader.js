@@ -2,26 +2,29 @@ import React, {useRef} from 'react'
 import {useStores} from '../stores'
 import {observer} from 'mobx-react'
 import {InboxOutlined} from '@ant-design/icons'
-import {Upload} from 'antd'
+import {Upload, message} from 'antd'
 
 const {Dragger} = Upload
 
 
 const Component = observer(() => {
-  const {ImageStore} = useStores()
+  const {ImageStore, UserStore} = useStores()
 
   const props = {
     showUploadList: false,
     beforeUpload: file => {
       ImageStore.setFile(file)
       ImageStore.setFilename(file.name)
-      ImageStore.upload()
-        .then((serverFile) => {
-            console.log('上传成功')
-            console.log(serverFile)
-          }
-        )
-        .catch(() => console.log('上传失败'))
+      if(UserStore.currentUser == null){
+        message.warning('请先登陆再上传')
+      }else{
+        ImageStore.upload()
+          .then((serverFile) => {
+              console.log('上传成功')
+              console.log(serverFile)
+            }
+          ).catch(() => console.log('上传失败'))
+      }
       return false
     }
   }
