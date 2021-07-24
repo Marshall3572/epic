@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import {useStores} from '../stores'
 import {observer, useLocalStore} from 'mobx-react'
 import {InboxOutlined} from '@ant-design/icons'
-import {Upload, message} from 'antd'
+import {Upload, message, Spin} from 'antd'
 import styled from 'styled-components'
 import image from '../stores/image'
 
@@ -57,33 +57,44 @@ const Component = observer(() => {
       beforeUpload: file => {
         ImageStore.setFile(file)
         ImageStore.setFilename(file.name)
-        // if (UserStore.currentUser == null) {
-        //   message.warning('请先登陆再上传')
-        // } else {
+        if (UserStore.currentUser == null) {
+          message.warning('请先登陆再上传')
+          return false
+        }
+        // 可以在控制台看到文件的api
+        window.file = file
+
+        // .ig是指忽略大小写
+        if (!/(svg$)|(png$)|(jpg$)|(jpeg$)|(gif$)/ig.test(file.type)) {
+          message.error('只能上传.png/.gif/.jpg/.svg格式的图片')
+          return false
+        }
+        if (file.size > 1024 * 1024) {
+          message.error('最大上传1M图片')
+          return false
+        }
         ImageStore.upload()
           .then((serverFile) => {
               console.log('上传成功')
-              console.log(serverFile)
             }
           ).catch(() => console.log('上传失败'))
-        // }
         return false
       }
     }
 
     return (
       <div>
-        <Dragger {...props}>
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined/>
-          </p>
-          <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-            band files
-          </p>
-        </Dragger>
-
+        <Spin tip='上传中' spinning={ImageStore.isUploading}>
+          <Dragger {...props}>
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined/>
+            </p>
+            <p className="ant-upload-text">点击或者拖拽上传图片</p>
+            <p className="ant-upload-hint">
+              仅支持.png/.gif/.jpg/.svg格式的图片，图片最大1M
+            </p>
+          </Dragger>
+        </Spin>
         {
           ImageStore.serverFile ?
             <Result>
