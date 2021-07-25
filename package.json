@@ -2,6 +2,7 @@
   "name": "epic-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@babel/core": "7.12.3",
