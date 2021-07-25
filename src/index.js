@@ -4,9 +4,8 @@ import App from './App'
 import 'antd/dist/antd.css'
 import reportWebVitals from './reportWebVitals'
 import {
-  BrowserRouter as Router
+  HashRouter as Router
 } from 'react-router-dom'
-import Model from './models/index'
 
 ReactDOM.render(
     <Router>
