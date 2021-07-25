@@ -1,12 +1,11 @@
 import React from 'react'
 import List from '../components/List'
 
-const Component = () => {
+export default() => {
   return (
     <>
       <h1>History</h1>
-      <List />
+      <List/>
     </>
   )
 }
-export default Component

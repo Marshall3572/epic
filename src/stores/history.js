@@ -3,7 +3,7 @@ import {Uploader} from '../models'
 import {message} from 'antd'
 import {action, observable} from 'mobx'
 
-class History {
+class HistoryStore {
   @observable list = []
   @observable isLoading = false
   @observable hasMore = true
@@ -30,3 +30,5 @@ class History {
   }
 
 }
+
+export default new HistoryStore()
