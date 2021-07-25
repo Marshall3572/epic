@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/About.js"],"names":["Component"],"mappings":"gHAAA,uBAUeA,UARG,WAChB,OACE,mCACE","file":"static/js/7.7eba6444.chunk.js","sourcesContent":["import React from 'react'\n\nconst Component = () => {\n  return (\n    <>\n      <h1>About</h1>\n    </>\n  )\n}\n\nexport default Component"],"sourceRoot":""}
