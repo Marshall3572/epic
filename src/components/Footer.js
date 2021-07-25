@@ -10,9 +10,9 @@ const Footer = styled.footer`
 
 const Component = () => {
   return (
-    <footer>
-      <p>Footer</p>
-    </footer>
+    <Footer>
+      <p>@Marshall_Liu</p>
+    </Footer>
   )
 }
 
