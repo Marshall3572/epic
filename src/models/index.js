@@ -32,7 +32,7 @@ const Auth = {
 }
 
 const Uploader = {
-  add: function (file, filename) {
+  add(file, filename) {
     const item = new AV.Object('Image')
     const avFile = new AV.File(filename, file)
     item.set('filename', filename)
@@ -40,6 +40,24 @@ const Uploader = {
     item.set('url', avFile)
     return new Promise((resolve, reject) => {
       item.save().then(serverfile => resolve(serverfile), err => reject(err))
+    })
+  },
+  find({page = 0, limit = 10}) {
+    const query = new AV.Query('Image')
+    query.include('owner')
+    query.limit(limit)
+    query.skip(page * limit)
+    query.descending('createAt')
+    // 只能查询自己的文件
+    query.equalTo('owner', AV.User.current())
+    return new Promise((resolve, reject) => {
+      query.find()
+        .then((result) => {
+          resolve(result)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 }
